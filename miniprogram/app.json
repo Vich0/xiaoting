@@ -1,4 +1,7 @@
 {
+  "requiredPrivateInfos": [
+    "getLocation"
+  ],
   "tabBar": {
     "custom": true,
     "color": "#000000",
@@ -13,9 +16,6 @@
       },
       {
         "pagePath": "pages/cart/cart"
-      },
-      {
-        "pagePath": "pages/person/person"
       }
     ]
   },
@@ -38,7 +38,8 @@
     "pages/position/position",
     "pages/cart/cart",
     "pages/person/person",
-    "pages/prepage/prepage"
+    "pages/prepage/prepage",
+    "pages/bill/bill"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -83,11 +84,15 @@
     "van-tab": "@vant/weapp/tab/index",
     "van-tabs": "@vant/weapp/tabs/index",
     "van-sticky": "@vant/weapp/sticky/index",
-    "van-divider": "@vant/weapp/divider/index"
+    "van-divider": "@vant/weapp/divider/index",
+    "van-swipe-cell": "@vant/weapp/swipe-cell/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index",
+    "van-picker": "@vant/weapp/picker/index"
   },
   "permission": {
     "scope.userLocation": {
-      "desc": "你的位置信息将用于获取周边服务" 
+      "desc": "你的位置信息将用于获取周边服务"
     }
   }
 }

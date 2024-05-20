@@ -19,11 +19,11 @@ Component({
         name:'cart',
         url:'/pages/cart/cart'
       },
-      {
-        icon:'user-o',
-        name:'user',
-        url:'/pages/person/person'
-      },
+      // {
+      //   icon:'user-o',
+      //   name:'user',
+      //   url:'/pages/person/person'
+      // },
     ] 
   },
   
@@ -44,7 +44,7 @@ Component({
       const page = getCurrentPages().pop();
       this.setData({
         active: this.data.list.findIndex(item => item.url === `/${page.route}`)
-      });      console.log("active:"+this.data.active)
+      });     
 
     }
   }
