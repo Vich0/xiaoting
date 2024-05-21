@@ -50,6 +50,7 @@
   },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
+    "van-image": "@vant/weapp/image/index",
     "van-sidebar": "@vant/weapp/sidebar/index",
     "van-sidebar-item": "@vant/weapp/sidebar-item/index",
     "van-goods-action": "@vant/weapp/goods-action/index",

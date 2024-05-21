@@ -42,10 +42,10 @@ Page({
       'https://dress-1324460017.cos.ap-shanghai.myqcloud.com/活动/0.jpg/Scale',
       'https://dress-1324460017.cos.ap-shanghai.myqcloud.com/活动/1.jpg/Scale',
     ],
-    item_name_Custom:['服装'],
+    item_name:[{icon:'dress',name:'服装'},{icon:'pic_Indoor',name:'内景写真'},{icon:'pic_Outdoor',name:'外景写真'}],
     //item_name_Custom:['服装','妆造','内景写真','外景写真'],
     //item_name_Manager:['订单管理','财务管理','库存管理','会员管理'],
-    item_name_Manager:['订单管理'],
+    item_name_Manager:[{icon:'order',name:'订单管理'},{icon:'member',name:'客户管理'}],
     pageUrl:['dress','makeup','pic_Indoor','pic_Outdoor','order','finance','inventory','member'],
     isManager:-1,
     openid:''
@@ -67,6 +67,14 @@ Page({
           if (res.data.length!=0){
             globalData.userInfo=res.data[0]
           }else{
+            globalData.userInfo={
+              openid:openid,
+              name:'微信用户',
+              img:''
+            }
+            that.addToDb()
+          }
+          if(globalData.userInfo.name=='微信用户'){
             that.setData({
               show:true
             })
@@ -84,19 +92,22 @@ Page({
         name:name,
         img:'https://dress-1324460017.cos.ap-shanghai.myqcloud.com/avatar/'+that.data.openid+'.jpg'
       }
-      wx.request({
-        url: 'https://service-ocfokc81-1324460017.sh.tencentapigw.com/release/setUserInfo',
-        data: JSON.stringify(globalData.userInfo),
-        method:'POST',
-        header: {
-          'content-type': 'application/json'
-        },
-        success(res) {
-            console.log('添加用户信息成功')
-        }
-      })
+      that.addToDb()
     }
     
+  },
+  addToDb(){
+    wx.request({
+      url: 'https://service-ocfokc81-1324460017.sh.tencentapigw.com/release/setUserInfo',
+      data: JSON.stringify(globalData.userInfo),
+      method:'POST',
+      header: {
+        'content-type': 'application/json'
+      },
+      success(res) {
+          console.log('添加用户信息成功')
+      }
+    })
   },
   setManager(){
     const openid=this.data.openid
@@ -105,9 +116,16 @@ Page({
       url: 'https://service-ocfokc81-1324460017.sh.tencentapigw.com/release/getManagerID',
       success:res=>{
         const managerID=res.data.result.map(item=>item.openid)
-        that.setData({
-          isManager:managerID.indexOf(openid)
-        })
+        if(managerID.indexOf(openid)!=-1){
+          const data=that.data.item_name.concat(that.data.item_name_Manager)
+          console.log(data)
+          that.setData({
+            item_name:data
+          })
+        }
+        // that.setData({
+        //   isManager:managerID.indexOf(openid)
+        // })
       },
       fail:res=>{
         console.log("Fail")
@@ -166,9 +184,8 @@ Page({
   },
   changePage(event){
     var index = event.currentTarget.dataset.index
-    var pageUrl = this.data.pageUrl
     wx.navigateTo({
-      url: '/pages/'+pageUrl[index]+'/'+pageUrl[index],
+      url: '/pages/'+index+'/'+index,
     })
   },
   getUser(event) {
@@ -179,7 +196,7 @@ Page({
   },
   onClickItem(event){
     const that=this
-    if (!globalData.userInfo){
+    if (globalData.userInfo.name=='微信用户'||globalData.userInfo.img==''){
       that.setData({
         show:true
       })

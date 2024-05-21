@@ -11,7 +11,21 @@ page{
   justify-content: space-between;
   padding: 2%;
 }
-
+.price_tag{
+  position:absolute !important;
+  bottom:0;
+  right:0;
+  font-size: 12px !important;
+  scale: 0.8;
+}
+.name_tag{
+  position:absolute !important;
+  top:0;
+  left:2px;
+  font-size: 12px !important;
+  scale: 0.8;
+  color: rgba(0,0,0,0.6);
+}
 .mid {
   flex: 1;
   overflow: scroll;

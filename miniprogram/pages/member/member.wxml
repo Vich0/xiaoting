@@ -1,2 +1,19 @@
 <!--pages/member/member.wxml-->
-<text>pages/member/member.wxml</text>
+<view class="head">
+  <van-search
+  model:value="{{ value }}"
+  input-align="center"
+  placeholder="请输入搜索关键词"
+/>
+</view>
+<scroll-view class="mid">
+<van-cell-group>
+  <van-cell wx:for="{{users}}" wx:key="openid" >
+  <view slot="title">
+    <image class="user_img" src="{{item.img}}" />
+    <text class="user_name">{{item.name}}</text>
+  </view>
+
+  </van-cell>
+</van-cell-group>
+</scroll-view>

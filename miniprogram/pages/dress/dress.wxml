@@ -26,6 +26,8 @@
           lazy-load="{{true}}"
           mode="widthFix"
         />
+        <view class="name_tag" >{{item.clothing_id}}</view>
+        <van-tag plain type="primary" custom-class="price_tag" >{{item.price}}</van-tag>
       </van-grid-item>
     </van-grid> 
 </view>

@@ -5,6 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    pay_time:'',
+    time_show:false,
     real_price:0,
     bill_price:0,
     end_price:0,
@@ -32,6 +34,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(option) {
+    this.setPayTime(new Date())
     this.setData({
       order_id:option.order_id,
       real_price:Number(option.real_price),
@@ -46,7 +49,7 @@ Page({
     }
     wx.request({
       url: 'https://service-ocfokc81-1324460017.sh.tencentapigw.com/release/setOrderBill',
-      data: JSON.stringify({order_id:data.order_id,price:data.price,type:data.type,pay_way:data.pay_way,remark:data.remark}),
+      data: JSON.stringify({order_id:data.order_id,price:data.price,type:data.type,pay_way:data.pay_way,remark:data.remark,pay_time:data.pay_time}),
       method:'POST',
       header: {
         'content-type': 'application/json'
@@ -132,6 +135,23 @@ Page({
    */
   onShow() {
 
+  },
+  changeTime(val){
+    this.setPayTime(val.detail)
+  },
+  setPayTime(day){
+    const Y =day.getFullYear(); 
+  const M = (day.getMonth() + 1 < 10 ? '0' + (day.getMonth() + 1) : day.getMonth() + 1);
+  const D = day.getDate() < 10 ? '0' + day.getDate() : day.getDate(); 
+   const date =Y+'-'+M+'-'+D
+   this.setData({
+     pay_time:date
+   })
+  },
+  openPayTime(){
+    this.setData({
+      time_show:!this.data.time_show
+    })
   },
 
   /**

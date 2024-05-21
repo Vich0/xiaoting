@@ -10,21 +10,16 @@
    
     </swiper-item>
 </swiper> -->
+<van-grid column-num="2" square>
+  <van-grid-item use-slot bind:click="onClickItem" data-index="{{item.icon}}"  wx:for="{{item_name}}"  wx:key="index">
+  <view>
+    <image src="https://dress-1324460017.cos.ap-shanghai.myqcloud.com/icon/{{item.icon}}.png/Compress" style="width: 50px; height: 90px;" />
+    </view>
+    <text>{{item.name}}</text>
+  </van-grid-item>
 
-<view class="itemBox">
-  <view class="itemBoxCostum">
-  <view class="item"  wx:for="{{item_name_Custom}}" wx:key="index" data-index="{{index}}" bindtap="onClickItem">
-    <image src="https://dress-1324460017.cos.ap-shanghai.myqcloud.com/icon/{{pageUrl[index]}}.png/Compress?{{random}}"    style="width: 100%;" mode="widthFix"/>
-      <view>{{item}}</view>
-    </view>
-  </view>
-  <view class="itemBoxManager" wx:if="{{isManager!=-1}}">
-    <view class="item"  wx:for="{{item_name_Manager}}" wx:key="index" data-index="{{index+4}}" bindtap="onClickItem">
-      <image src="https://dress-1324460017.cos.ap-shanghai.myqcloud.com/icon/{{pageUrl[index+4]}}.png/Compress?{{random}}"  style="width: 100%;" mode="widthFix"/>
-      <view>{{item}}</view>
-    </view>
-  </view>
-</view>
+</van-grid>
+
 <van-dialog
   use-slot
   title="请使用微信头像和昵称"

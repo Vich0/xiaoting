@@ -1,1 +1,14 @@
 /* pages/member/member.wxss */
+.user_img{
+  float: left;
+  height:30px;
+  width:30px;
+  margin-right: 10px;
+}
+.user_name{
+  line-height: 30px;
+}
+
+.mid {
+  height:auto(100% - 40px)
+}
